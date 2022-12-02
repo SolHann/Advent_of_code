@@ -8,8 +8,8 @@ def sum_groups(input):
         if x == '':  # Since we have already split by /n x = '' indicates an empty line
             sum_l.append(sum)
             sum = 0
-            continue
-        sum += int(x)
+        else:
+            sum += int(x)
     return sum_l
 
 

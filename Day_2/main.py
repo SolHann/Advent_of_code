@@ -4,21 +4,28 @@ def method(input):
     for l in input:
         round = l.strip().split(" ")
         player = round[1]
-        opponent = round [0]
-        if player == 'X':
-            sum += 1
-        elif player == 'Y':
-            sum += 2
-        elif player == 'Z':
-            sum += 3
-
-        if opponent == "A" and player == "Y" or opponent == "B" and player == "Z" or opponent == "C" and player == "X":
-            sum += 6
-        elif opponent == "A" and player == "X" or opponent == "B" and player == "Y" or opponent == "C" and player == "Z":
-            sum += 3
-        elif opponent == "A" and player == "Z" or opponent == "B" and player == "X" or opponent == "C" and player == "Y":
-            sum += 0
-
+        opponent = round[0]
+        if player == "X":
+            if opponent == "A":
+                sum += 3
+            elif opponent == "B":
+                sum += 1
+            else:
+                sum += 2
+        if player == "Y":
+            if opponent == "A":
+                sum += 4
+            elif opponent == "B":
+                sum += 5
+            else:
+                sum += 6
+        if player == "Z":
+            if opponent == "A":
+                sum += 8
+            elif opponent == "B":
+                sum += 9
+            else:
+                sum += 7
     return sum
 
 
