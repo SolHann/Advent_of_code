@@ -16,6 +16,7 @@ def sum_groups(input):
 # Return the three largest ints in a list
 def three_largest(list):
     big_three = []
+
     for i in range(3):
         x = max(list)
         big_three.append(x)
@@ -24,6 +25,7 @@ def three_largest(list):
     return big_three
 
 
+# A simplier way to do this would be to sort list and then take the sum of top three
 if __name__ == '__main__':
     input = open('input.txt')
     sum_l = sum_groups(input)
