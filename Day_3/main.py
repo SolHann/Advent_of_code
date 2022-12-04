@@ -1,19 +1,17 @@
 def p1(input):
     sum = 0
-    for x in input:
+    for l in input:
         # Creates set of both halves, finds the intersection of the halves and pops
-        dupe = set(x[0:(int(len(x)/2))]).intersection(x[int((len(x)/2)):(int(len(x)))]).pop()
+        dupe = set(l[0:(int(len(l)/2))]).intersection(l[int((len(l)/2)):(int(len(l)))]).pop()
         sum += (ord(dupe)) - 96 if dupe.islower() else ord(dupe) - 38
     return sum
 
 
 def p2(input):
-    i = 0
     sum = 0
-    while i < len(input):
-        dupe = set(input[i]).intersection(input[i+1], input[i+2]).pop()
+    for l in range(0, len(input), 3):
+        dupe = set(input[l]).intersection(input[l+1], input[l+2]).pop()
         sum += (ord(dupe)) - 96 if dupe.islower() else ord(dupe) - 38
-        i += 3
     return sum
 
 
