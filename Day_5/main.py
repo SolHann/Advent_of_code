@@ -11,10 +11,10 @@ def stack(input):
 
 def p1(input):
     stacks = stack(input)
-    for line in input[10:]:
-        moves = line.split(' ')
-        moves = [int(x) for x in moves if x.isnumeric()]
 
+    for line in input[10:]:
+        # Create a list of each int in the instructions
+        moves = [int(x) for x in line.split(' ') if x.isnumeric()]
         for x in range(moves[0]):
             stacks[moves[2] - 1].append((stacks[moves[1]-1]).pop())
 
@@ -24,13 +24,10 @@ def p1(input):
 def p2(input):
     stacks = stack(input)
     for line in input[10:]:
-        # Create a list of each int in the instructions
-        line = line.split(' ')
-        line = [int(x) for x in line if x.isnumeric()]
+        line = [int(x) for x in line.split(' ') if x.isnumeric()]
 
         stacks[line[2] - 1].extend((stacks[line[1] - 1])[-line[0]:])
         del (stacks[line[1] - 1])[-line[0]:]
-
 
     return [i[-1] for i in stacks]
 
