@@ -16,7 +16,7 @@ def p1(input):
 
 def p2(input):
     counter = 0
-    multiplier = [1]*10
+    multiplier = [1]*10  # Queue  (last in last out)
 
     for card in input:
         point = 0
@@ -27,12 +27,12 @@ def p2(input):
 
         for i in player_nums:
             if i in winning_no:
-                point += 1
+                number_of_wins += 1
 
         multi = multiplier.pop(0)
         multiplier.append(1)
 
-        for i in range(point):
+        for i in range(number_of_wins):
             multiplier[i] += multi
 
         counter += multi
