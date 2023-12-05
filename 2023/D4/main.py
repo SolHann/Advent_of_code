@@ -1,45 +1,51 @@
-def p1(input):
-    sum = 0
-    for card in input:
-        point = 0
+def calculate_points_v1(cards):
+    total_points = 0
+    for card in cards:
+        points = 0
 
-        player_nums, winning_no = card.split(":")[1].split("|")
-        player_nums = player_nums.split()
-        winning_no = winning_no.split()
+        _, card_data = card.split(":")
+        player_numbers, winning_numbers = card_data.split("|")
+        player_numbers = player_numbers.split()
+        winning_numbers = winning_numbers.split()
 
-        for i in player_nums:
-            if i in winning_no:
-                point = 1 if point == 0 else point * 2
-        sum += point
-    return sum
-
-
-def p2(input):
-    counter = 0
-    multiplier = [1]*10  # Queue  (last in last out)
-
-    for card in input:
-        point = 0
-
-        player_nums, winning_no = card.split(":")[1].split("|")
-        player_nums = player_nums.split()
-        winning_no = winning_no.split()
-
-        for i in player_nums:
-            if i in winning_no:
-                number_of_wins += 1
-
-        multi = multiplier.pop(0)
-        multiplier.append(1)
-
-        for i in range(number_of_wins):
-            multiplier[i] += multi
-
-        counter += multi
-    return counter
+        for number in player_numbers:
+            if number in winning_numbers:
+                points = 1 if points == 0 else points * 2
+        total_points += points
+    return total_points
 
 
-with open('input.txt', 'r') as f:
-    items = [line.strip() for line in f]
-    print(p1(items), '\n')
-    print(p2(items))
+def calculate_points_v2(cards):
+    total_points = 0
+    win_multiplier = [1] * 10
+
+    for card in cards:
+        _, card_data = card.split(":")
+        player_numbers, winning_numbers = card_data.split("|")
+        player_numbers = player_numbers.split()
+        winning_numbers = winning_numbers.split()
+
+        wins_count = sum(number in winning_numbers for number in player_numbers)
+        multiplier = win_multiplier.pop(0)
+        win_multiplier.append(1)
+
+        for i in range(wins_count):
+            win_multiplier[i] += multiplier
+
+        total_points += multiplier
+    return total_points
+
+
+def read_cards_from_file(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            return [line.strip() for line in file]
+    except IOError as e:
+        print(f"Error reading file: {e}")
+        return []
+
+
+# Main execution
+cards = read_cards_from_file('input.txt')
+print(calculate_points_v1(cards), '\n')
+print(calculate_points_v2(cards))
